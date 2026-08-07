@@ -65,20 +65,20 @@ Output:
 
 ### Configuration
 
-| Environment variable | Description | Default |
-|---------------------|-------------|---------|
-| `LOG_LEVEL` | Root logger level (all loggers) | `INFO` |
-| `APP_LOG_LEVEL` | Your app code's log level (auto-detected from caller package) | — |
+| Environment variable | Description                                                   | Default |
+|----------------------|---------------------------------------------------------------|---------|
+| `LOG_LEVEL`          | Root logger level (all loggers)                               | `INFO`  |
+| `APP_LOG_LEVEL`      | Your app code's log level (auto-detected from caller package) | —       |
 
 ### Severity levels
 
-| Level | Severity |
-|-------|----------|
-| CRITICAL | 0 |
-| ERROR | 1 |
-| WARNING | 2 |
-| INFO | 3 |
-| DEBUG | 4 |
+| Level    | Severity |
+|----------|----------|
+| CRITICAL | 0        |
+| ERROR    | 1        |
+| WARNING  | 2        |
+| INFO     | 3        |
+| DEBUG    | 4        |
 
 ## Development
 
