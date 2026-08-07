@@ -1,0 +1,14 @@
+[
+  {
+    "team_slug": "dissemination",
+    "permission": "maintain"
+  },
+  {
+    "team_slug": "dissemination-tech-leads",
+    "permission": "admin"
+  },
+  {
+    "team_slug": "dissemination-platform",
+    "permission": "admin"
+  }
+]
