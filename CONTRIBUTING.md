@@ -14,7 +14,8 @@ pre-commit install
 
 If you want to do an adhoc run of pre-commit
 
-> :warning: This will only run on files that are staged in git
+> [!WARNING]
+> This will only run on files that are staged in git
 
 ```bash
 pre-commit run --all-files
@@ -39,9 +40,26 @@ make format   # Auto-format code
 
 This package is consumed as a git dependency. To release a new version:
 
-1. Update the `version` in `pyproject.toml`
-2. Merge to `main`
-3. Tag the commit: `git tag v1.x.x && git push --tags`
+> [!IMPORTANT]
+> Requires the [GitHub CLI (`gh`)](https://cli.github.com/) to be installed and authenticated.
+>
+> Install with `brew install gh`.
+
+```bash
+make release
+```
+
+This will:
+
+1. Check `gh` CLI is installed
+2. Check you're on `main` with no uncommitted changes
+3. Check HEAD isn't already tagged
+4. Show the current version and ask if it's a major, minor, or patch bump
+5. Show commits since the last release
+6. Ask for confirmation
+7. Create a signed tag with the changelog as the tag message
+8. Push the tag to origin
+9. Create a GitHub Release with auto-generated notes
 
 Consumers update by changing the `tag` in their `pyproject.toml`.
 

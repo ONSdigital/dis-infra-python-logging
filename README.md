@@ -88,7 +88,22 @@ make test     # Run tests
 make lint     # Run linting
 make format   # Auto-format
 make all      # Run everything
+make release  # Tag and push a new release (interactive)
 ```
+
+## Releasing
+
+> [!IMPORTANT]
+> Requires the [GitHub CLI (`gh`)](https://cli.github.com/) to be installed and authenticated.
+>
+> Install with `brew install gh`.
+
+```bash
+make release
+```
+
+Interactively creates a signed tag, pushes it, and creates a GitHub Release with
+a changelog. See [CONTRIBUTING.md](CONTRIBUTING.md#releasing) for details.
 
 ## Contributing
 
