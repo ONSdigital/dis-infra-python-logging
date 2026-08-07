@@ -141,7 +141,6 @@ release: ## Create a signed tag and push a release (interactive). Requires: gh C
 	echo "Pushing tag to origin..."; \
 	git push origin "$$NEW_VERSION"; \
 	echo "Creating GitHub Release..."; \
-	RELEASE_NOTES=$$(printf "## Commits\n\n$$CHANGELOG"); \
-	gh release create "$$NEW_VERSION" --title "$$NEW_VERSION" --notes "$$RELEASE_NOTES" --generate-notes --verify-tag; \
+	gh release create "$$NEW_VERSION" --title "$$NEW_VERSION" --generate-notes --verify-tag; \
 	echo ""; \
 	echo "$(_COLOUR_GREEN)✅ Released $$NEW_VERSION$(_RESET)"
