@@ -1,0 +1,42 @@
+# https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file
+
+version: 2
+updates:
+  # Python dependencies
+  - package-ecosystem: "pip"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    commit-message:
+      prefix: "chore"
+      prefix-development: "chore"
+      include: "scope"
+    open-pull-requests-limit: 5
+    groups:
+      py-security-updates:
+        applies-to: security-updates
+        patterns:
+          - '*'
+      py-version-updates:
+        applies-to: version-updates
+        patterns:
+          - '*'
+
+  # GitHub Actions
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    commit-message:
+      prefix: "chore"
+      prefix-development: "chore"
+      include: "scope"
+    groups:
+      gh-actions-security-updates:
+        applies-to: security-updates
+        patterns:
+          - '*'
+      gh-actions-updates:
+        applies-to: version-updates
+        patterns:
+          - '*'
