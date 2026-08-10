@@ -1,0 +1,7 @@
+{
+    "source": {
+        "repo": "ONSdigital/gh-repo-settings-config",
+        "path": "dissemination/platform-public",
+        "ref": "main"
+    }
+}
