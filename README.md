@@ -7,17 +7,15 @@ as a reusable package.
 
 ## Installation
 
-Add as a git dependency in your `pyproject.toml`:
+```bash
+pip install dis-logging
+```
+
+Or with Poetry:
 
 ```toml
 [tool.poetry.dependencies]
-dis-logging = {git = "git@github.com:ONSdigital/dis-infra-python-logging.git", tag = "v1.0.0"}
-```
-
-Then run:
-
-```bash
-poetry lock && poetry install
+dis-logging = "^1.0.0"
 ```
 
 ## Usage
@@ -88,23 +86,20 @@ make test     # Run tests
 make lint     # Run linting
 make format   # Auto-format
 make all      # Run everything
-make release  # Tag and push a new release (interactive)
 ```
 
 ## Releasing
 
-> [!IMPORTANT]
-> Requires the [GitHub CLI (`gh`)](https://cli.github.com/) to be installed and authenticated.
->
-> Install with `brew install gh`.
+Releases are automated. To create a new release:
 
-```bash
-make release
-```
-
-Interactively creates a signed tag, pushes it, and creates a GitHub Release with
-a changelog. See [CONTRIBUTING.md](CONTRIBUTING.md#releasing) for details.
+1. Bump the `version` in `pyproject.toml` as part of your PR
+2. Merge to `main`
+3. The release workflow automatically creates a GitHub Release and tag
 
 ## Contributing
 
 Full contributing [guidelines are covered here](CONTRIBUTING.md).
+
+## Licence
+
+[MIT](LICENCE)

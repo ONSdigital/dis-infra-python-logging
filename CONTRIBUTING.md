@@ -38,30 +38,14 @@ make format   # Auto-format code
 
 ## Releasing
 
-This package is consumed as a git dependency. To release a new version:
+Releases are automated via GitHub Actions. To create a new release:
 
-> [!IMPORTANT]
-> Requires the [GitHub CLI (`gh`)](https://cli.github.com/) to be installed and authenticated.
->
-> Install with `brew install gh`.
+1. Bump the `version` in `pyproject.toml` as part of your PR
+2. Get the PR reviewed and merged to `main`
+3. The release workflow detects the version change and automatically creates a
+   GitHub Release with auto-generated notes
 
-```bash
-make release
-```
-
-This will:
-
-1. Check `gh` CLI is installed
-2. Check you're on `main` with no uncommitted changes
-3. Check HEAD isn't already tagged
-4. Show the current version and ask if it's a major, minor, or patch bump
-5. Show commits since the last release
-6. Ask for confirmation
-7. Create a signed tag with the changelog as the tag message
-8. Push the tag to origin
-9. Create a GitHub Release with auto-generated notes
-
-Consumers update by changing the `tag` in their `pyproject.toml`.
+The version in `pyproject.toml` is the single source of truth.
 
 ## Reporting Bugs/Feature Requests
 
