@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "dis-logging"
-version = "1.0.2"
+version = "1.0.3"
 description = "ONS Dissemination JSON log formatter for Python Lambda functions"
 authors = ["ONS Digital"]
 readme = "README.md"
