@@ -21,7 +21,7 @@
         "teams": [],
         "apps": []
       },
-      "require_code_owner_reviews": false
+      "require_code_owner_reviews": true
     },
     "required_signatures": true,
     "enforce_admins": true,
