@@ -1,0 +1,69 @@
+---
+name: Release
+
+on: # yamllint disable-line rule:truthy
+  push:
+    branches: [main]
+    paths:
+      - 'pyproject.toml'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        with:
+          fetch-depth: 2
+
+      - name: Check if version changed
+        id: version
+        run: |
+          # Get current version from pyproject.toml
+          CURRENT=$(grep '^version' pyproject.toml | head -1 | sed 's/version = "//;s/"//')
+          # Get previous version from the prior commit
+          PREVIOUS=$(git show HEAD~1:pyproject.toml 2>/dev/null | grep '^version' | head -1 | sed 's/version = "//;s/"//' || echo "")
+
+          echo "current=$CURRENT" >> "$GITHUB_OUTPUT"
+          echo "previous=$PREVIOUS" >> "$GITHUB_OUTPUT"
+
+          if [ "$CURRENT" != "$PREVIOUS" ] && [ -n "$CURRENT" ]; then
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+            echo "Version changed: $PREVIOUS -> $CURRENT"
+          else
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            echo "::notice::Version unchanged ($CURRENT). No release required."
+          fi
+
+      - name: Validate release
+        if: steps.version.outputs.changed == 'true'
+        id: validate
+        run: |
+          TAG="v${{ steps.version.outputs.current }}"
+
+          # Check tag doesn't already exist locally
+          if git rev-parse "$TAG" >/dev/null 2>&1; then
+            echo "::error::Release $TAG already exists — bump the version in pyproject.toml and try again."
+            exit 1
+          fi
+
+          # Check tag doesn't exist on remote
+          if git ls-remote --tags origin "$TAG" | grep -q "$TAG"; then
+            echo "::error::Release $TAG already exists — bump the version in pyproject.toml and try again."
+            exit 1
+          fi
+
+          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
+          echo "✅ Tag $TAG is available"
+
+      - name: Create tag and GitHub Release
+        if: steps.version.outputs.changed == 'true' && steps.validate.outcome == 'success'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          TAG="v${{ steps.version.outputs.current }}"
+          echo "Creating release $TAG"
+          gh release create "$TAG" --title "$TAG" --generate-notes
+          echo "::notice::✅ Released $TAG"
