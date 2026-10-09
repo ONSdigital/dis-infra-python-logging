@@ -14,7 +14,7 @@ json-log-formatter = "^1.1.1"
 [tool.poetry.group.dev.dependencies]
 flake8 = "^7.3.0"
 black = "^26.5.1"
-isort = "^8.0.1"
+isort = ">=8.0.1,<10.0.0"
 
 [tool.poetry.group.test.dependencies]
 pytest = "^9.0.3"
